@@ -1,23 +1,23 @@
-/*========================== SHA256 with Crypto-js ===========================|
+/*=========================	SHA256 with Crypto-js	============================|
 |						Learn more: Crypto-js: https://github.com/brix/crypto-js					|
 |============================================================================*/
 
 const SHA256 = require('crypto-js/sha256');
 
-/*======================== Persist data with LevelDB =========================|
-|							 Learn more: level: https://github.com/Level/level							|
+/*========================	Persist data with LevelDB	========================|
+|								Learn more: level: https://github.com/Level/level							|
 |============================================================================*/
 
 const level = require('./levelSandbox');
 
-/*================================ Block Class ===============================|
+/*===============================	Block Class	================================|
 |												Class with a constructor for block										|
 |============================================================================*/
 
 const blocky = require('./block')
 
-/*============================= Blockchain Class =============================|
-|									 Class with a constructor for new blockchain 				 				|
+/*=============================	Blockchain Class	============================|
+|										Class with a constructor for new blockchain								|
 |============================================================================*/
 
 class Blockchain {

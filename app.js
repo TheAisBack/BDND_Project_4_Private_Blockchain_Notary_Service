@@ -1,3 +1,7 @@
+/*==================================	App.js	================================|
+|												Main application to run blockchain										|
+|============================================================================*/
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const Blockchain = require('./simpleChain');

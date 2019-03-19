@@ -1,25 +1,30 @@
 {
-  "name": "ls",
-  "version": "1.0.0",
-  "description": "## Getting Started",
-  "main": "app.js",
-  "dependencies": {
-    "crypto-js": "^3.1.9-1",
-    "express": "^4.16.4",
-    "level": "^4.0.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TheAisBack/BDND_Project_3_RESTful_Web_API.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TheAisBack/BDND_Project_3_RESTful_Web_API/issues"
-  },
-  "homepage": "https://github.com/TheAisBack/BDND_Project_3_RESTful_Web_API#readme"
+	"name": "ls",
+	"version": "1.0.0",
+	"description": "## Getting Started",
+	"main": "app.js",
+	"dependencies": {
+		"bitcoinjs-lib": "^4.0.2",
+		"bitcoinjs-message": "^2.0.0",
+		"body-parser": "^1.18.3",
+		"crypto-js": "^3.1.9-1",
+		"express": "^4.16.4",
+		"hapi": "^18.1.0",
+		"hex2ascii": "0.0.3",
+		"level": "^4.0.0"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TheAisBack/BDND_Project_3_RESTful_Web_API.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/TheAisBack/BDND_Project_3_RESTful_Web_API/issues"
+	},
+	"homepage": "https://github.com/TheAisBack/BDND_Project_3_RESTful_Web_API#readme"
 }
