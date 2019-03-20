@@ -17,7 +17,7 @@ const addLevelDBData = async (key,value) => {
 };
 
 //  Get data from levelDB with key
-const getLevelDBData = async (key) => db.get(key);
+//	const getLevelDBData = async (key) => db.get(key);
 
 //	Add data to levelDB with value
 function addDataToLevelDB(value) {
@@ -33,7 +33,7 @@ function addDataToLevelDB(value) {
 }
 
 //	Get block by hash
-getBlockByHash(hash) {
+function getBlockByHash(hash) {
 	let self = this;
 	let block = null;
 	return new Promise(function(resolve, reject){
@@ -56,7 +56,7 @@ getBlockByHash(hash) {
 //	db.createReadStream()
 
 //	Get data from levelDB with key (Promise)
-getLevelDBData(key) {
+function getLevelDBData(key) {
 	let self = this;
 	return new Promise(function(resolve, reject) {
 		self.db.get(key, (err, value) => {

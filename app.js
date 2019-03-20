@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Blockchain = require('./simpleChain');
 const Block = require('./block')
+const Mempool = require('./mempool')
 const app = express();
 const chain = new Blockchain();
 const port = 8000;
