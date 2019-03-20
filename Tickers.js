@@ -1,4 +1,0 @@
-DIS
-SOLO
-HEXO
-WEED

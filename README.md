@@ -44,6 +44,12 @@ node app.js
 5.  Get Star Block by Wallet Address (Blockchain Identity) with JSON Response.
 6.  Get Star Block by Star Block Height with JSON Response.
 
+###  Workflow
+
+<p align="center">
+    <img src="https://github.com/TheAisBack/BDND_Project_4_Private_Blockchain_Notary_Service/blob/master/project4-workflow.png">
+</p>
+
 ###	Web API POST Endpoint to Validate Request with JSON Response.
 
 Use the URL for the endpoint:
