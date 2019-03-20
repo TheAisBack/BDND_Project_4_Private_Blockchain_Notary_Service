@@ -32,11 +32,6 @@ function addDataToLevelDB(value) {
 	});
 }
 
-module.exports = {
-	addLevelDBData,
-	getLevelDBData,
-};
-
 //	Get block by hash
 getBlockByHash(hash) {
 	let self = this;
@@ -78,3 +73,9 @@ getLevelDBData(key) {
 		});
 	});
 }
+
+module.exports = {
+	addLevelDBData,
+	getLevelDBData,
+	getBlockByHash,
+};

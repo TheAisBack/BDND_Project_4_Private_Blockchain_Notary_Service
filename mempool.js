@@ -11,12 +11,6 @@ setTimeOut {
 	let timeLeft = (TimeoutRequestsWindowTime/1000) - timeElapse;
 	req.validationWindow = timeLeft;
 }
-requestObject {
-	"walletAddress": "19xaiMqayaNrn3x7AjV5cU4Mk5f5prRVpL",
-	"requestTimeStamp": "1541605128",
-	"message": "19xaiMqayaNrn3x7AjV5cU4Mk5f5prRVpL:1541605128:starRegistry",
-	"validationWindow": 300
-}
 validateRequestByWallet {
 	const bitcoinMessage = require('bitcoinjs-message'); 
 	let isValid = bitcoinMessage.verify(message, address, signature);
@@ -29,31 +23,4 @@ validateRequestByWallet {
 		validationWindow: validationWindow,
 		messageSignature: valid
 	};
-}
-validRequest {
-	"registerStar": true,
-	"status": {
-		"address": "19xaiMqayaNrn3x7AjV5cU4Mk5f5prRVpL",
-		"requestTimeStamp": "1541605128",
-		"message": "19xaiMqayaNrn3x7AjV5cU4Mk5f5prRVpL:1541605128:starRegistry",
-		"validationWindow": 200,
-		"messageSignature": true
-	}
-}
-verifyAddressRequest {
-
-}
-addblock(body) {
-	let body = {
-		address: req.body.address,
-		star: {
-			ra: RA,
-			dec: DEC,
-			mag: MAG,
-			cen: CEN,
-			story: Buffer(starStory).toString('hex')
-		}
-	};
-	let block = new Block(body);
-	//	Use your `addBlock(block)` method
 }

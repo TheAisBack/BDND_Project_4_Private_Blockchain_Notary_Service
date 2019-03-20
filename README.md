@@ -35,7 +35,14 @@ npm install bitcoinjs-lib --save
 node app.js
 ```
 
-Perform the Following Tasks to validate the Blockchain Notary Service
+## Perform the Following Tasks to validate the Blockchain Notary Service
+
+1.  Web API POST Endpoint to Validate Request with JSON Response.
+2.  Web API POST Endpoint Validates Message Signature with JSON Response.
+3.  Web API POST Endpoint with JSON Response that Submits The Star Information to be Saved in the Blockchain.
+4.  Get Star Block by Hash with JSON Response.
+5.  Get Star Block by Wallet Address (Blockchain Identity) with JSON Response.
+6.  Get Star Block by Star Block Height with JSON Response.
 
 ###	Web API POST Endpoint to Validate Request with JSON Response.
 
@@ -209,10 +216,10 @@ The response includes entire star block contents along with the addition of star
   "body": {
     "address": "142BDCeSGbXjWKaAnYXbMpZ6sbrSAo3DpZ",
     "star": {
-    	"ra": "16h 29m 1.0s",
-    	"dec": "-26° 29' 24.9",
-    	"story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f",
-    	"storyDecoded": "Found star using https://www.google.com/sky/"
+      "ra": "16h 29m 1.0s",
+      "dec": "-26° 29' 24.9",
+      "story": "466f756e642073746172207573696e672068747470733a2f2f7777772e676f6f676c652e636f6d2f736b792f",
+      "storyDecoded": "Found star using https://www.google.com/sky/"
     }
   },
   "time": "1532296234",
