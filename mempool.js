@@ -1,47 +1,53 @@
-/*============================	Mempool Class	================================|
-|															Mempool Class File															|
+/*===================	Mempool Controller Class	==============================|
+|										Mempool Controller Class File															|
 |============================================================================*/
 
-class Mempool {
-	AddRequestValidation() {
+const bitcoinMessage = require('bitcoinjs-message');
+const TimeoutRequestsWindowTime5MINS = 5*60*1000;
+const TimeoutRequestsWindowTime30MINS = 30*60*1000;
+const validateRequest = require('./validateRequest');
+const block = require('./block');
+const SHA256 = require('crypto-js/sha256');
+const hex2ascii = require('hex2ascii');
+const star = require('./star');
+
+class MempoolController {
+	constructor() {
 		this.mempool = [];
 		this.timeoutRequests = [];
+		this.mempoolValid = [];
 	}
-	setTimeOut() {
-		self.timeoutRequests[request.walletAddress]=setTimeout(function(){
-			self.removeValidationRequest(request.walletAddress)
-		}, TimeoutRequestsWindowTime );
-		const TimeoutRequestsWindowTime = 5*60*1000;
-		let timeElapse = (new Date().getTime().toString().slice(0,-3)) - req.requestTimeStamp;
-		let timeLeft = (TimeoutRequestsWindowTime/1000) - timeElapse;
-		req.validationWindow = timeLeft;
+	AddRequestValidation(address) {
+		let self = this;
+		let requestvalid = this.mempool[address];
+		if (requestvalid === undefined){
+			newrequestvalid = this.validateRequest(address);
+			this.mempool[address] = newrequestvalid;
+			self.timeoutRequests[newrequestvalid.address]=setTimeout(function(){
+				self.removeValidationRequest(newrequestvalid.address)
+			}, TimeoutRequestsWindowTime5MINS);
+		}
+		return newrequestvalid;
 	}
-	validateRequestByWallet() {
-		const bitcoinMessage = require('bitcoinjs-message'); 
+	validateRequestByWallet(message, address, signature) {
+		let self = this;
 		let isValid = bitcoinMessage.verify(message, address, signature);
-
-		this.registerStar = true;
-		this.status = {
-			address: walletAddress,
-			requestTimeStamp: requestTimeStamp,
-			message: message,
-			validationWindow: validationWindow,
-			messageSignature: valid
-		};
+		let verifywallet = this.mempoolValid[address];
+		if(isValid){
+			let valid = self.timeoutRequests[isValid.address]=setTimeout(function(){
+				self.removeValidationRequest(isValid.address)
+			}, TimeoutRequestsWindowTime30MINS);
+			return valid
+		}
 	}
-	async addblock(body) {
-		let body = {
-			address: req.body.address,
-			star: {
-				ra: RA,
-				dec: DEC,
-				mag: MAG,
-				cen: CEN,
-				story: Buffer(starStory).toString('hex')
-			}
-		};
-		let block = new Block(body);
+	verifyAddressRequest(address) {
+		let self = this;
+		let verifyrequest = this.mempool[address];
+		if (verifyrequest) {
+			let valid = self.timeoutRequests[verifyrequest.address]=setTimeout(function(){
+				self.removeValidationRequest(verifyrequest.address)
+			}, TimeoutRequestsWindowTime30MINS);
+			return valid;
+		}
 	}
 }
-
-module.exports = Mempool

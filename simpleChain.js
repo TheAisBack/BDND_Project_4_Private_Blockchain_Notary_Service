@@ -28,42 +28,52 @@ class Blockchain {
 
 	//	Add new block
 	//	addBlock(newBlock) includes a method to store newBlock within LevelDB
-	async addBlock(newBlock) {
+	addBlock(newBlock) {
 		//	Block height
 		newBlock.height = this.chain.length;
 		//	UTC timestamp
 		newBlock.time = new Date().getTime().toString().slice(0,-3);
 		//	Previous block hash
 		if (this.chain.length>0) {
-		  newBlock.previousBlockHash = this.chain[this.chain.length-1].hash;
+			newBlock.previousBlockHash = this.chain[this.chain.length-1].hash;
 		}
 		//	Block hash with SHA256 using newBlock and converting to a string
 		newBlock.hash = SHA256(JSON.stringify(newBlock)).toString();
 		//	Adding block object to chain
 		this.chain.push(newBlock);
-		await level.addLevelDBData(newBlock.height, JSON.stringify(newBlock));
+		level.addLevelDBData(newBlock.height, JSON.stringify(newBlock));
 		return JSON.stringify(newBlock);
-	}
-
-	//	Modify getBlockHeight() function to retrieve current block height
-	//	within the LevelDB chain
-	async getBlockHeight() {
-		return level.getLevelDBData('height');
 	}
 
 	//	Modify getBlock() function to retrieve a block by its block height
 	//	within the LevelDB chain
-	async getBlock(blockHeight) {
+	getBlock(blockHeight) {
 		return level.getLevelDBData(blockHeight);
+	}
+
+	//	Get Block Hash
+	getBlockByHash(hash){
+		return level.getBlockByHash(hash);
+	}
+
+	//	Modify getBlockHeight() function to retrieve current block height
+	//	within the LevelDB chain
+	getBlockHeight() {
+		return level.getLevelDBData('height');
+	}
+
+	//	Get Block By Wallet Address
+	getBlockByWalletAddress(address){
+		return level.getBlockByWalletAddress(address);
 	}
 
 	//	Validate block
 	//	Modify the validateBlock() function to validate a block stored within
 	//	levelDB
-	async validateBlock(blockHeight) {
+	validateBlock(blockHeight) {
 		//	Getting a Promise returned - Help From Udacity Knowledge
 		//	get the value of the block object
-		let value = await this.getBlock(blockHeight);
+		let value = this.getBlock(blockHeight);
 		//	Get block hash
 		let blockHash = value.hash;
 		//	Remove block hash to test block integrity
@@ -82,7 +92,7 @@ class Blockchain {
 	//	Validate blockchain
 	//	Modify validateChain() function to validate blockchain stored within
 	//	levelDB
-	async validateChain() {
+	validateChain() {
 		let errorLog = [];
 		for (var i = 0; i < this.chain.length-1; i++) {
 			//	Validate block
@@ -103,4 +113,4 @@ class Blockchain {
 	}
 }
 
-module.exports = Blockchain
+module.exports.Blockchain = Blockchain;

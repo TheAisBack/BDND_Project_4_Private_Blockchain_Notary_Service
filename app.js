@@ -1,44 +1,49 @@
-/*==================================	App.js	================================|
-|												Main application to run blockchain										|
+/*================================	App.js	==================================|
+|							Following the practice file in express.js in Lesson 2.					|
+|										Where our old file is revamped to real use.								|
 |============================================================================*/
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const Blockchain = require('./simpleChain');
-const Block = require('./block')
-const Mempool = require('./mempool')
-const app = express();
-const chain = new Blockchain();
-const port = 8000;
+//	Importing Express.js module
+const express = require("express");
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//	Importing BodyParser.js module
+const bodyParser = require("body-parser");
 
-//	Get block endpoint
-app.get('/block/:height', async (req, res) => {
-	try {
-		const { height } = req.params;
-		const block = await chain.getBlock(height);
-		console.log(block);
-		return res.send(JSON.parse(block))
-	} catch(error) {
-		res.status(404).json({
-			"message": "Error no block found"
-		})
+//	Class Definition for the REST API
+class BlockAPI {
+
+	//	Constructor that allows us to initialize the class 
+	constructor() {
+		this.app = express();
+		this.initExpress();
+		this.initExpressMiddleWare();
+		this.initControllers();
+		this.start();
 	}
-});
 
-app.post("/block", (req, res) => {
-	if (req.body.body === "" || req.body.body === undefined) {
-		return res.status(400).send("Pass data to the block");
-	} else {
-		let addNewBlock = new Block(req.body.body);
-		chain.addBlock(addNewBlock).then(result => {
-			return res.status(200).send(result);
-		}).catch(err => {
-			return res.status(400).send(err);
+	//	Initialization of the Express framework
+	initExpress() {
+		this.app.set("port", 8000);
+	}
+
+	//	Initialization of the middleware modules
+	initExpressMiddleWare() {
+		this.app.use(bodyParser.urlencoded({extended:true}));
+		this.app.use(bodyParser.json());
+	}
+
+	//	Initialization of all the controllers
+	initControllers() {
+		require("./BlockController.js")(this.app);
+	}
+
+	//	Starting the REST Api application
+	start() {
+		let self = this;
+		this.app.listen(this.app.get("port"), () => {
+			console.log(`Server Listening for port: ${self.app.get("port")}`);
 		});
 	}
-});
+}
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+new BlockAPI()
