@@ -22,7 +22,7 @@ class MempoolController {
 		//	http://localhost:8000/requestValidation
 		this.app.post("/requestValidation", (req, res) => {
 
-			let requestvalid = this.mempool[req.bodyaddress];
+			let requestvalid = this.mempool[req.body.address];
 
 			if (requestvalid){
 				res.send({validateRequest})
