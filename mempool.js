@@ -19,35 +19,45 @@ class MempoolController {
 	}
 	AddRequestValidation(address) {
 		let self = this;
-		let requestvalid = this.mempool[address];
-		if (requestvalid === undefined){
-			newrequestvalid = this.validateRequest(address);
-			this.mempool[address] = newrequestvalid;
-			self.timeoutRequests[newrequestvalid.address]=setTimeout(function(){
-				self.removeValidationRequest(newrequestvalid.address)
-			}, TimeoutRequestsWindowTime5MINS);
+		//	http://localhost:8000/requestValidation
+		this.app.post("/requestValidation", (req, res) => {
+
+			let requestvalid = this.mempool[req.bodyaddress];
+
+			if (requestvalid){
+				res.send({validateRequest})
+			} else {
+				TimeoutRequestsWindowTime5MINS
+			}
 		}
-		return newrequestvalid;
 	}
 	validateRequestByWallet(message, address, signature) {
 		let self = this;
-		let isValid = bitcoinMessage.verify(message, address, signature);
-		let verifywallet = this.mempoolValid[address];
-		if(isValid){
-			let valid = self.timeoutRequests[isValid.address]=setTimeout(function(){
-				self.removeValidationRequest(isValid.address)
-			}, TimeoutRequestsWindowTime30MINS);
-			return valid
+		//	http://localhost:8000/message-signature/validate
+		this.app.post("/message-signature/validate", (req, res) => {
+
+			let verifywallet = this.mempoolValid[req.body.address];
+			let isValid = bitcoinMessage.verify(verifywallet.message, req.body.address, req.body.signature);
+
+			if(isValid){
+				res.send({validateRequest})
+			} else {
+				TimeoutRequestsWindowTime5MINS
+			}
 		}
 	}
 	verifyAddressRequest(address) {
 		let self = this;
-		let verifyrequest = this.mempool[address];
-		if (verifyrequest) {
-			let valid = self.timeoutRequests[verifyrequest.address]=setTimeout(function(){
-				self.removeValidationRequest(verifyrequest.address)
-			}, TimeoutRequestsWindowTime30MINS);
-			return valid;
+		//	http://localhost:8000/block
+		this.app.post("/block", (req, res) => {
+
+			let verifyrequest = this.mempool[req.body.address];
+
+			if (verifyrequest) {
+				res.send({star})
+			} else {
+				TimeoutRequestsWindowTime5MINS
+			}
 		}
 	}
 }
