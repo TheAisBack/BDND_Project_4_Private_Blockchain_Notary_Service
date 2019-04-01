@@ -9,13 +9,13 @@ const Blockchain = require('./simpleChain');
 class BlockController {
 	//	Constructor to create a new BlockController, you need to initialize here all 
 	//	your endpoints @param {*} app
-	/*constructor(app) {
+	constructor(app) {
 		this.app = app;
 		this.blocks = [];
 		this.initializeMockData();
 		this.getBlockByIndex();
 		this.postNewBlock();
-	}*/
+	}
 	//	Implement a GET Endpoint to retrieve a block by index, url: "/api/block/:index"	
 	getBlockByIndex() {
 		this.app.get("/block/:index", (req, res) => {
